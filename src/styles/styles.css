@@ -1,0 +1,283 @@
+/* Estilo general en modo oscuro */
+body {
+    background-color: #1a1a1a;
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+}
+
+.movie {
+    background-color: #333;
+    border: 1px solid #444;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px;
+    color: #ecd50a;
+}
+
+.cartel {
+    display: block; /* Esto le indicará al navegador que trate la imagen como si fuera un elemento de bloque, no un elemento en línea, lo que te permitirá usar la propiedad de margen CSS */
+    width: 40%; /* Cantidad fija para que no abarque toda la ventana */
+    margin: auto; /* Establece los márgenes izquierdo y derecho en «automático» para que sean iguales */
+    margin-bottom: 40px;
+}
+
+.movies-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.movies-container > * {
+    flex: 1 1 40%; /* Esto hará que los elementos ocupen aproximadamente el 40% del ancho del contenedor, pero se ajustarán para evitar el desbordamiento */
+    max-width: 40%; /* Esto limitará el ancho de los elementos al 40% del contenedor */
+    margin: 10px; /* Esto agregará un poco de espacio alrededor de los elementos */
+}
+
+.header-footer {
+    background-color: #222;
+    padding: 10px;
+    text-align: center;
+}
+
+.home-titulo {
+    text-align: center;
+}
+
+.header-footer-text {
+    color: #ead308;
+}
+
+.center-text {
+    text-align: center;
+}
+
+.linear-progress {
+    width: 100%;
+    height: 20px;
+    background-color: #e0e0e0; /* Color de fondo de la barra de progreso */
+    overflow: hidden;
+    border-radius: 4px;
+}
+
+.progress-bar {
+    height: 100%;
+    transition: width 0.3s ease-in-out; /* Agrega una transición suave al cambiar el ancho */
+}
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.box {
+    flex: 1;
+    max-width: 300px; /* Puedes ajustar este valor según tus necesidades */
+    margin: 20px;
+}
+
+.image-comprasmovie {
+    height: 150px;
+    border-radius: 8px;
+    background-image: url('../images/compras.png');
+    background-size: cover;
+    background-position: center;
+    display: block;
+    width: 100%;
+}
+
+.image-movies {
+    height: 150px;
+    border-radius: 8px;
+    background-image: url('../images/movies-estrenos.png');
+    background-size: cover;
+    background-position: center;
+    display: block;
+    width: 100%;
+}
+
+.menu-link {
+    text-decoration: none;
+}
+
+.menu-button {
+    background-color: #a09445; /* Color de fondo verde, puedes cambiarlo */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.menu-button:hover {
+    background-color: #f3d408; /* Cambia el color de fondo al pasar el ratón sobre el botón */
+}
+
+.detalle-button {
+    background-color: #e3c704; /* Color de fondo verde, puedes cambiarlo */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.detalle-button:hover {
+    background-color: #1a298f; /* Cambia el color de fondo al pasar el ratón sobre el botón */
+}
+
+.not-found {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.not-found h2 {
+    font-size: 3rem;
+    color: #f44336; /* Rojo Bootstrap */
+}
+
+.not-found p {
+    font-size: 1.5rem;
+    color: #555; /* Gris oscuro Bootstrap */
+    margin-top: 20px;
+}
+/* Estilos CSS actualizados para SearchInput.css */
+
+.form-control {
+    display: block;
+    width: 50%; /* Puedes ajustar el ancho según tus necesidades */
+    margin-left: auto; /* Mueve el buscador a la derecha */
+    margin-right: 0; /* Asegura que no haya margen derecho */
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.form-control:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.trailer-container {
+    max-width: 100%; /* Ajusta el ancho máximo según tus necesidades */
+    margin: 20px 0; /* Añade margen según tus necesidades */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para resaltar el contenedor */
+}
+
+.trailer-container iframe {
+    width: 100%; /* Hace que el iframe ocupe el 100% del contenedor */
+    height: 500px; /* Ajusta la altura según tus necesidades */
+    border: none; /* Elimina el borde predeterminado del iframe */
+}
+
+.disabled-button {
+    background-color: #dddddd; /* Puedes cambiar esto al color que desees */
+    /* ... Otros estilos */
+}
+
+.modal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro */
+}
+
+.modal-content {
+    background-color: #666b66;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.movie-details {
+    display: flex;
+    justify-content: space-between;
+}
+
+.column {
+    flex: 1;
+    margin-right: 20px;
+
+}
+
+div.column p {
+    font-weight: bold;
+
+}
+
+div.column p span {
+    font-weight: normal;
+    color: #e8dc8e;
+}
+
+.landing {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.landing h1 {
+    position: relative;
+    text-align: center;
+}
+
+/* Estilo para el puntero láser */
+.laser-pointer, .laser-pointer-reverse {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: #2038d3;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    animation: rotateAround 2s linear infinite;
+}
+
+.laser-pointer-reverse {
+    animation: rotateAroundReverse 2s linear infinite;
+}
+
+/* Animación para girar alrededor del título */
+@keyframes rotateAround {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg) translateX(150px);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg) translateX(150px);
+    }
+}
+
+@keyframes rotateAroundReverse {
+    0% {
+        transform: translate(-50%, -50%) rotate(360deg) translateX(150px);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(0deg) translateX(150px);
+    }
+}
