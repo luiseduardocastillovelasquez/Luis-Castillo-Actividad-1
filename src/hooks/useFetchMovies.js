@@ -11,8 +11,6 @@ const useFetchMovies = (movieId, serviceType) => {
                 let url = process.env.REACT_APP_API_URL_MOVIE;
                 if (movieId) {
                     url += `/${movieId}`;
-                }   else if (serviceType === 'agregate') {
-                    url += `?agregate=true`;
                 }
 
                 const response = await fetch(url, {
@@ -29,7 +27,7 @@ const useFetchMovies = (movieId, serviceType) => {
 
                 const movies = await response.json();
                 console.log(movies);
-                setMovieDetails(movies);
+                setMovieDetails(movies.products ? movies.products : movies);
             } catch (error) {
                 setError(error);
             } finally {
