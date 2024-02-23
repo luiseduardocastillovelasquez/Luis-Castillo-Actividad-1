@@ -1,14 +1,14 @@
 import React, {useState, useEffect, useContext} from "react";
-import {MovieContext} from "../context/MovieContext";
-
 
 export const useSearch = ({ onSearch }) => {
     const [search, setSearch] = useState("");
 
+
     const handleSearch = (e) => {
+        console.log("Searching with value:", e);
         const value = e.target.value;
         setSearch(value)
-        onSearch(search);
+        onSearch(value);
     };
 
     return (

@@ -1,21 +1,20 @@
 import React, {useContext, useState} from "react";
 import {Link, useParams} from "react-router-dom";
-import {MovieContext} from "../context/MovieContext";
 import LinearProgress from "./LinearProgress";
 import useEstadoMovie from "../hooks/useEstadoMovie";
+import useFetchMovies from "../hooks/useFetchMovies";
 const MovieDetails = () => {
     const {movieId} = useParams();
-    const {movies} = useContext(MovieContext);
-    const movie = movies.find(r => r.id === movieId);
-
-    const [showModal, setShowModal] = useState(false);
-    const [showModalComprar, setShowModalComprar] = useState(false);
+    const { movieDetails, loading, error } = useFetchMovies(movieId);
     const { verPeliculaEnabled, alquilarPelicula, comprarPelicula } = useEstadoMovie({
         movieId,
         onAlquilar: () => {
 
         },
     });
+
+    const [showModal, setShowModal] = useState(false);
+    const [showModalComprar, setShowModalComprar] = useState(false);
 
     const pagarAlquiler = () => {
         // ocultamos nuestra ventana Modal
@@ -30,30 +29,38 @@ const MovieDetails = () => {
         comprarPelicula();
     };
 
-    if (!movies){
-        return <h2>Pelicula no encontrada</h2>;
+    if (loading) {
+        return <LinearProgress color="green" />;
+    }
+
+    if (error || !movieDetails) {
+        return <h2>Error al cargar los detalles de la película</h2>;
     }
 
     return (
 
-        movies.length > 0 ? (
+
         <div className="movie">
-            <h2>{movie.name}</h2>
-            <img className="cartel" src={movie.imagen} alt={movie.imagen}/>
+            <h2>{movieDetails.name}</h2>
+            <img className="cartel" src={movieDetails.image} alt={movieDetails.image}/>
             <div className="movie-details">
                 <div className="column">
-                    <p>Sinopsis: <span>{movie.synopsis}</span></p>
-                    <p>Director: <span>{movie.director}</span></p>
-                    <p>Duracion: <span>{movie.duration} minutos</span></p>
-                    <p>Año: <span>{movie.year}</span></p>
-                    <p>Valor Compra: <span>${movie.preciocompra} Pesos</span></p>
+                    <p>Sinopsis: <span>{movieDetails.synopsis}</span></p>
+                    <p>Director: <span>{movieDetails.director}</span></p>
+                    <p>Duracion: <span>{movieDetails.duration} minutos</span></p>
+                    <p>Año: <span>{movieDetails.releaseYear}</span></p>
+                    <p>Valor Compra: <span>${movieDetails.purchaseValue} Pesos</span></p>
                 </div>
                 <div className="column">
-                    <p>Criticas: <span>{movie.reviews}</span></p>
-                    <p>Actores: <span>{movie.actores}</span></p>
-                    <p>Idioma: <span>{movie.idioma}</span></p>
-                    <p>Categoria: <span>{movie.categoria}</span></p>
-                    <p>Valor Alquiler: <span>${movie.precioalquiler} Pesos</span></p>
+                    <p>Criticas: <span>{movieDetails.reviews}</span></p>
+                    <p>Actores: <span>{movieDetails.actors}</span></p>
+                    <p>Idioma: <span>{movieDetails.language && movieDetails.language.length > 0
+                        ? movieDetails.language.map(cat => cat.name).join(', ')
+                        : 'Sin idioma'}</span></p>
+                    <p>Categorias: <span>{movieDetails.language && movieDetails.categorias.length > 0
+                        ? movieDetails.categorias.map(cat => cat.name).join(', ')
+                        : 'Sin idioma'}</span></p>
+                    <p>Valor Alquiler: <span>${movieDetails.rentalValue} Pesos</span></p>
                 </div>
             </div>
             <button className="detalle-button" onClick={() => setShowModalComprar(true)}>
@@ -73,7 +80,7 @@ const MovieDetails = () => {
                 <div className="modal">
                     <div className="modal-content">
                         <p>¿Estás seguro de que quieres alquilar?</p>
-                        <p>{movie.name} a <span>${movie.precioalquiler} Pesos</span></p>
+                        <p>{movieDetails.name} a <span>${movieDetails.precioalquiler} Pesos</span></p>
                         <button className="detalle-button" onClick={pagarAlquiler}>Aceptar</button>
                         <button className="detalle-button" onClick={() => setShowModal(false)}>Cancelar</button>
                     </div>
@@ -83,8 +90,8 @@ const MovieDetails = () => {
                 <div className="modal">
                     <div className="modal-content">
                         <p>¿Estás seguro de que quieres comprar la Pelicula?</p>
-                        <p>{movie.name}</p>
-                        <p>Valor Compra: <span>${movie.preciocompra} Pesos</span></p>
+                        <p>{movieDetails.name}</p>
+                        <p>Valor Compra: <span>${movieDetails.preciocompra} Pesos</span></p>
                         <button className="detalle-button" onClick={pagarComprar}>Aceptar</button>
                         <button className="detalle-button" onClick={() => setShowModalComprar(false)}>Cancelar</button>
                     </div>
@@ -92,9 +99,7 @@ const MovieDetails = () => {
             )}
 
         </div>
-        ):(
-            <LinearProgress color="green" />
-        )
+
     );
 }
 

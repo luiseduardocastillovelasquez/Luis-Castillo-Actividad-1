@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const useFetchMovies = () => {
+const useFetchMovies = (movieId) => {
     const [movieDetails, setMovieDetails] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -8,7 +8,11 @@ const useFetchMovies = () => {
     useEffect(() => {
         const fetchMovieDetails = async () => {
             try {
-                const response = await fetch('http://localhost:8762/ms-inventory-movies/movies', {
+                let url = process.env.REACT_APP_API_URL_MOVIE;
+                if (movieId) {
+                    url += `/${movieId}`;
+                }
+                const response = await fetch(url, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

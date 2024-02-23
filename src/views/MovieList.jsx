@@ -1,57 +1,60 @@
-import React, {useContext, useState} from "react";
-import {Movie} from "../components/Movie";
-import {MovieContext} from "../context/MovieContext";
+import React, { useContext, useEffect, useState } from "react";
+import { Movie } from "../components/Movie";
+import { MovieContext } from "../context/MovieContext";
 import LinearProgress from "./LinearProgress";
 import UseSearch from "../hooks/useSearch";
+import useFetchMovies from "../hooks/useFetchMovies";
 
 export const MoviesList = () => {
-
-    const {movies} = useContext(MovieContext);
     const [search, setSearch] = useState("");
-    const [filteredMovies, setFilteredMovies] = useState(movies);
+    const { movieDetails, loading, error } = useFetchMovies();
+    const [filteredMovies, setFilteredMovies] = useState([]);
 
-    const handleSearch = (value) =>{
-        setSearch(value)
 
-        const filteredResults = movies.filter((dato) =>
+    useEffect(() => {
+        // Cuando movieDetails cambie, actualiza los filteredMovies
+        setFilteredMovies(movieDetails);
+    }, [movieDetails]);
+
+    const handleSearch = (value) => {
+        setSearch(value);
+
+        const filteredResults = movieDetails.filter((dato) =>
             Object.values(dato).some((field) =>
-                field.toLowerCase().includes(value.toLowerCase())
+                typeof field === 'string' && field.toLowerCase().includes(value.toLowerCase())
             )
         );
-        console.log(movies);
+        console.log("Filtered Movies:", filteredResults);
 
-            setFilteredMovies(filteredResults);
+        setFilteredMovies(filteredResults);
     };
 
     return (
         <div>
-        <h2 className="center-text">Peliculas Disponibles</h2>
+            <h2 className="center-text">Peliculas Disponibles</h2>
             <UseSearch onSearch={handleSearch} />
-        <div className="movies-container">
-            {
-                filteredMovies.length > 0 ? (
-                    filteredMovies.map((movie, index) => (
-                <Movie
-                    key={index}
-                    id={movie.id}
-                    name={movie.name}
-                    director={movie.director}
-                    year={movie.year}
-                    duration={movie.duration}
-                    synopsis={movie.synopsis}
-                    reviews={movie.reviews}
-                    imagen={movie.imagen}
-                    idioma={movie.idioma}
-                    actores={movie.actores}
-                    categoria={movie.categoria}
-                />
-            ))
-                ):(
+            <div className="movies-container">
+                {loading ? (
                     <LinearProgress color="green" />
-                )
-            }
-            {}
+                ) : (
+                    filteredMovies.map((movie, index) => (
+                        <Movie
+                            key={index}
+                            id={movie.id}
+                            name={movie.name}
+                            director={movie.director}
+                            year={movie.year}
+                            duration={movie.duration}
+                            synopsis={movie.synopsis}
+                            reviews={movie.reviews}
+                            imagen={movie.image}
+                            idiomas={movie.language}
+                            actores={movie.actores}
+                            categorias={movie.categorias}
+                        />
+                    ))
+                )}
+            </div>
         </div>
-    </div>
     );
 };
