@@ -5,7 +5,7 @@ import useEstadoMovie from "../hooks/useEstadoMovie";
 import useFetchMovies from "../hooks/useFetchMovies";
 const MovieDetails = () => {
     const {movieId} = useParams();
-    const { movieDetails, loading, error } = useFetchMovies(movieId);
+    const { movieDetails, loading, error } = useFetchMovies(movieId, null);
     const { verPeliculaEnabled, alquilarPelicula, comprarPelicula } = useEstadoMovie({
         movieId,
         onAlquilar: () => {
@@ -38,8 +38,6 @@ const MovieDetails = () => {
     }
 
     return (
-
-
         <div className="movie">
             <h2>{movieDetails.name}</h2>
             <img className="cartel" src={movieDetails.image} alt={movieDetails.image}/>
@@ -97,9 +95,7 @@ const MovieDetails = () => {
                     </div>
                 </div>
             )}
-
         </div>
-
     );
 }
 

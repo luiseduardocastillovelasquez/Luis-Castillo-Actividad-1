@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const useFetchMovies = (movieId) => {
+const useFetchMovies = (movieId, serviceType) => {
     const [movieDetails, setMovieDetails] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -11,7 +11,10 @@ const useFetchMovies = (movieId) => {
                 let url = process.env.REACT_APP_API_URL_MOVIE;
                 if (movieId) {
                     url += `/${movieId}`;
+                }   else if (serviceType === 'agregate') {
+                    url += `?agregate=true`;
                 }
+
                 const response = await fetch(url, {
                     method: 'POST',
                     headers: {
@@ -35,7 +38,7 @@ const useFetchMovies = (movieId) => {
         };
 
         fetchMovieDetails();
-    }, []); // Este useEffect se ejecuta solo una vez, al montar el componente
+    }, [movieId, serviceType]); // Este useEffect se ejecuta solo una vez, al montar el componente
 
     return { movieDetails, loading, error };
 };

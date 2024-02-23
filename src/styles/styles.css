@@ -281,3 +281,38 @@ div.column p span {
         transform: translate(-50%, -50%) rotate(0deg) translateX(150px);
     }
 }
+
+/* Estilos CSS imaginarios para mejorar la presentación */
+.additional-details-title {
+    font-size: 1.5em;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.additional-details-container {
+    border: 1px solid #ccc;
+    padding: 10px;
+    borderRadius: 5px;
+}
+
+.additional-details-list {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.additional-details-item {
+    flex: 0 0 48%; /* Para mostrar dos elementos por fila */
+    margin: 5px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    borderRadius: 5px;
+    background-color: #f9f9f9;
+}
+
+.detail-name {
+    font-weight: bold;
+}
+
+.detail-count {
+    color: #007bff;
+}

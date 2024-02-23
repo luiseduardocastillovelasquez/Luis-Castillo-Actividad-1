@@ -2,12 +2,12 @@ import React, { useContext, useState, useEffect } from "react";
 import { MovieContext } from "../context/MovieContext";
 import LinearProgress from "./LinearProgress";
 import {MoviePay} from "../components/MoviePay";
+import useFetchMovies from "../hooks/useFetchMovies";
 
 export const MovieListPurchased = () => {
     const { movies } = useContext(MovieContext);
     const [search, setSearch] = useState("");
     const [filteredMovies, setFilteredMovies] = useState([]);
-
 
     useEffect(() => {
 
@@ -47,6 +47,7 @@ export const MovieListPurchased = () => {
 
     return (
         <div>
+
             <h2 className="center-text">Peliculas Disponibles</h2>
             <div className="movies-container">
                 {filteredMovies.length > 0 ? (

@@ -8,7 +8,8 @@ import useFetchMovies from "../hooks/useFetchMovies";
 export const MoviesList = () => {
     const [search, setSearch] = useState("");
     const { movieDetails, loading, error } = useFetchMovies();
-    const [filteredMovies, setFilteredMovies] = useState([]);
+    const [filteredMovies, setFilteredMovies] = useState([])
+    const { agregateMovieDetails, agregateLoading, agregateError } = useFetchMovies(null, 'agregate');
 
 
     useEffect(() => {
@@ -32,6 +33,22 @@ export const MoviesList = () => {
     return (
         <div>
             <h2 className="center-text">Peliculas Disponibles</h2>
+
+            <h3 className="additional-details-title">Detalles Adicionales:</h3>
+
+            <div className="additional-details-container">
+                {agregateMovieDetails && agregateMovieDetails.length > 0 && (
+                    <div className="additional-details-list">
+                        {agregateMovieDetails.map((detail, index) => (
+                            <div key={index} className="additional-details-item">
+                                <p className="detail-name">{detail.name}:</p>
+                                <span className="detail-count">{detail.count}</span>
+                            </div>
+                        ))}
+                    </div>
+                )}
+            </div>
+
             <UseSearch onSearch={handleSearch} />
             <div className="movies-container">
                 {loading ? (
