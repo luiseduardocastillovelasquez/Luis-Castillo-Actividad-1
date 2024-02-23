@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 
 const useFetchMovies = (movieId, serviceType) => {
     const [movieDetails, setMovieDetails] = useState([]);
+    const [agregateMovieDetails, setAgregateMovieDetails] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
@@ -31,7 +32,7 @@ const useFetchMovies = (movieId, serviceType) => {
                 const movies = await response.json();
                 console.log(movies);
                 if (serviceType === 'agregate') {
-                    setMovieDetails(movies.responses);
+                    setAgregateMovieDetails(movies.responses);
                 } else{
                     setMovieDetails(movies.products ? movies.products : movies);
             }
@@ -45,7 +46,7 @@ const useFetchMovies = (movieId, serviceType) => {
         fetchMovieDetails();
     }, [movieId, serviceType]); // Este useEffect se ejecuta solo una vez, al montar el componente
 
-    return { movieDetails, loading, error };
+    return { movieDetails, agregateMovieDetails, loading, error };
 };
 
 export default useFetchMovies;
