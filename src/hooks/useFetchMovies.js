@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
+import {useState, useEffect} from 'react';
 
 const useFetchMovies = (movieId, serviceType) => {
     const [movieDetails, setMovieDetails] = useState([]);
-    const [agregateMovieDetails, setAgregateMovieDetails] = useState([]);
+    const [aggregateMovieDetails, setAggregateMovieDetails] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
@@ -12,10 +12,11 @@ const useFetchMovies = (movieId, serviceType) => {
                 let url = process.env.REACT_APP_API_URL_MOVIE;
                 if (movieId) {
                     url += `/${movieId}`;
-                } else if (serviceType === 'agregate') {
+                } else if (serviceType === 'aggregate') {
                     url += `?agregate=true`;
+                } else if (serviceType) {
+                    url += `?classification=${serviceType}`;
                 }
-
 
                 const response = await fetch(url, {
                     method: 'POST',
@@ -30,12 +31,13 @@ const useFetchMovies = (movieId, serviceType) => {
                 }
 
                 const movies = await response.json();
-                console.log(movies);
-                if (serviceType === 'agregate') {
-                    setAgregateMovieDetails(movies.responses);
-                } else{
+
+                if (serviceType === 'aggregate') {
+                    setAggregateMovieDetails(movies.responses);
+                } else {
                     setMovieDetails(movies.products ? movies.products : movies);
-            }
+                }
+
             } catch (error) {
                 setError(error);
             } finally {
@@ -46,7 +48,7 @@ const useFetchMovies = (movieId, serviceType) => {
         fetchMovieDetails();
     }, [movieId, serviceType]); // Este useEffect se ejecuta solo una vez, al montar el componente
 
-    return { movieDetails, agregateMovieDetails, loading, error };
+    return { movieDetails, aggregateMovieDetails, loading, error };
 };
 
 export default useFetchMovies;
