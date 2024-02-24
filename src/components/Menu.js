@@ -7,7 +7,7 @@ const Menu = () => {
         <Link to={`/home`} className="menu-link">
             <button className="menu-button">Ver Catalogo</button>
         </Link>
-        <Link to={`/moviespurchased/`} className="menu-link">
+        <Link to={`/moviespurchased`} className="menu-link">
             <button className="menu-button">Peliculas Compradas o Alquiladas</button>
         </Link>
         </div>
