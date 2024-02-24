@@ -13,7 +13,7 @@ const useFetchMovies = (movieId, serviceType) => {
                 if (movieId) {
                     url += `/${movieId}`;
                 } else if (serviceType === 'aggregate') {
-                    url += `?agregate=true`;
+                    url += `?aggregate=true`;
                 } else if (serviceType) {
                     url += `?classification=${serviceType}`;
                 }
