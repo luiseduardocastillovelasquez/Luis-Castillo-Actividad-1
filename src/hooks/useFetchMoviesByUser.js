@@ -32,14 +32,14 @@ const useFetchMoviesByUser = () => {
                 }
 
                 const datos = await response.json();
-                /*console.log("useFetchMovieByUser");
+                console.log("useFetchMovieByUser");
                 console.log(datos);
 
                 console.log("datos.data");
-                console.log(datos.data[0]);*/
+                console.log(datos.data[0]);
 
-                /*console.log("datos.data.orderDetails");
-                console.log(datos.data[0].orderDetails);*/
+                console.log("datos.data.orderDetails");
+                console.log(datos.data[0].orderDetails);
                 setMoviesByUser(datos.data[0].orderDetails);
             } catch (error) {
                 setErrorUser(error);

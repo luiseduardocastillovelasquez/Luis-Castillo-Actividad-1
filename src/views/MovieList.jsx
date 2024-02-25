@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from "react";
+
+import {Link} from "react-router-dom";
+
+import {Movie} from "../components/Movie";
+
 import LinearProgress from "./LinearProgress";
+
 import UseSearch from "../hooks/useSearch";
 import useFetchMovies from "../hooks/useFetchMovies";
-import {Link} from "react-router-dom";
 
 export const MoviesList = () => {
     const [search, setSearch] = useState("");
