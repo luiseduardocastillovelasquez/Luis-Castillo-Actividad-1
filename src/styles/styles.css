@@ -282,17 +282,9 @@ div.column p span {
     }
 }
 
-/* Estilos CSS imaginarios para mejorar la presentación */
-.additional-details-title {
-    font-size: 1.5em;
-    color: #333;
-    margin-bottom: 10px;
-}
 
 .additional-details-container {
-    border: 1px solid #ccc;
-    padding: 10px;
-    borderRadius: 5px;
+    margin-top: 20px;
 }
 
 .additional-details-list {
@@ -301,12 +293,12 @@ div.column p span {
 }
 
 .additional-details-item {
-    flex: 0 0 48%; /* Para mostrar dos elementos por fila */
-    margin: 5px;
+    margin-right: 20px;
+    margin-bottom: 20px;
     padding: 10px;
-    border: 1px solid #ddd;
-    borderRadius: 5px;
-    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
 }
 
 .detail-name {
@@ -314,5 +306,5 @@ div.column p span {
 }
 
 .detail-count {
-    color: #007bff;
+    margin-top: 5px;
 }
