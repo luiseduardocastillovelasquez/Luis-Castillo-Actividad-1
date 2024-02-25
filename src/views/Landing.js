@@ -1,5 +1,5 @@
 import React from 'react';
-import useRedirection from "../hooks/useRedirectio";
+import useRedirection from "../hooks/useRedirection";
 
 function Landing() {
 

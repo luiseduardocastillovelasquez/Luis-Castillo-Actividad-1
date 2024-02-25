@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from "react-router-dom";
 const Home = () => {
+    localStorage.setItem('userId', JSON.stringify("1"));
     return (
         <div>
             <h2 className="home-titulo">¡Ultimos estrenos!</h2>

@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Movie } from "../components/Movie";
-import { MovieContext } from "../context/MovieContext";
 import LinearProgress from "./LinearProgress";
 import UseSearch from "../hooks/useSearch";
 import useFetchMovies from "../hooks/useFetchMovies";
