@@ -31,17 +31,10 @@ const useFetchMovies = (movieId, serviceType) => {
                 }
 
                 const movies = await response.json();
-<<<<<<< HEAD
-                //console.log(movies);
-                if (serviceType === 'agregate') {
-                    setAgregateMovieDetails(movies.responses);
-                } else{
-=======
 
                 if (serviceType === 'aggregate') {
                     setAggregateMovieDetails(movies.responses);
                 } else {
->>>>>>> 136fbd037cff00a66c88fc3867209d10db56d93a
                     setMovieDetails(movies.products ? movies.products : movies);
                 }
 

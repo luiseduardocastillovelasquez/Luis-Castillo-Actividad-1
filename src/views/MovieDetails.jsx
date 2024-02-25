@@ -3,6 +3,7 @@ import {Link, useParams} from "react-router-dom";
 import LinearProgress from "./LinearProgress";
 import useEstadoMovie from "../hooks/useEstadoMovie";
 import useFetchMovies from "../hooks/useFetchMovies";
+
 const MovieDetails = () => {
     const {movieId} = useParams();
     const { movieDetails, loading, error } = useFetchMovies(movieId, null);

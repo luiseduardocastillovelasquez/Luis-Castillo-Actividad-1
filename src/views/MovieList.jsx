@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import LinearProgress from "./LinearProgress";
 import UseSearch from "../hooks/useSearch";
 import useFetchMovies from "../hooks/useFetchMovies";

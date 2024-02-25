@@ -1,25 +1,3 @@
-<<<<<<< HEAD
-# Created by https://www.toptal.com/developers/gitignore/api/react
-# Edit at https://www.toptal.com/developers/gitignore?templates=react
-
-### react ###
-.DS_*
-*.log
-logs
-**/*.backup.*
-**/*.back.*
-
-node_modules
-bower_components
-
-*.sublime*
-
-psd
-thumb
-sketch
-
-# End of https://www.toptal.com/developers/gitignore/api/react
-=======
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
@@ -49,4 +27,3 @@ yarn-error.log*
 *.iws
 *.ipr
 .idea/
->>>>>>> 136fbd037cff00a66c88fc3867209d10db56d93a
