@@ -1,34 +1,87 @@
-import React, {useContext, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Link, useParams} from "react-router-dom";
 import LinearProgress from "./LinearProgress";
-import useEstadoMovie from "../hooks/useEstadoMovie";
 import useFetchMovies from "../hooks/useFetchMovies";
 
 const MovieDetails = () => {
     const {movieId} = useParams();
+
     const { movieDetails, loading, error } = useFetchMovies(movieId, null);
-    const { verPeliculaEnabled, alquilarPelicula, comprarPelicula } = useEstadoMovie({
-        movieId,
-        onAlquilar: () => {
 
-        },
-    });
+    const [verPeliculaEnabled, setVerPeliculaEnabled] = useState(false);
 
+    const [loadingOrder, setLoadingOrder] = useState(true);
+    const [errorOrder, setErrorOrder] = useState(null);
     const [showModal, setShowModal] = useState(false);
     const [showModalComprar, setShowModalComprar] = useState(false);
+    const [dataOrder, setDataOrder] = useState();
+
+    const userId = JSON.parse(localStorage.getItem('userId'));
 
     const pagarAlquiler = () => {
         // ocultamos nuestra ventana Modal
         setShowModal(false);
-
-        // llamamos a la funcion para alquilar la pelicula
-        alquilarPelicula();
+        createOrder(userId, movieId, 'RENT');
     };
 
     const pagarComprar = () => {
         setShowModalComprar(false);
-        comprarPelicula();
+        createOrder(userId, movieId, 'PURCHASE');
     };
+
+    const createOrder = async (userId, movieId, type) => {
+        try {
+            let url = process.env.REACT_APP_API_URL_ORDER + '/orders';
+
+            await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    targetMethod: 'POST',
+                    body: {
+                        userId: Number(userId),
+                        orders: [
+                            {
+                                movieId: movieId,
+                                type: type
+                            }
+                        ]
+                    }
+                }),
+            }).then(async function (resultArray) {
+                const response = await resultArray.json();
+                fetch(url + `/${response.data.id}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        targetMethod: 'PATCH',
+                        body: {
+                            status: "CONFIRMED"
+                        }
+                    }),
+                }).then(async response => {
+                    const response2 = await response.json();
+                    console.log("response2:");
+                    console.log(response2);
+                    if (response.ok) {
+                        setDataOrder(response2.data);
+                        setVerPeliculaEnabled(true);
+                    } else {
+                        setVerPeliculaEnabled(false);
+                    }
+                });
+            });
+        } catch (error) {
+            setVerPeliculaEnabled(false);
+            setErrorOrder(error);
+        } finally {
+            setLoadingOrder(false);
+        }
+    }
 
     if (loading) {
         return <LinearProgress color="green" />;

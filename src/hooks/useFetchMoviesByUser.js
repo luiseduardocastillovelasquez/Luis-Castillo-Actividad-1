@@ -6,6 +6,7 @@ const useFetchMoviesByUser = () => {
     const [errorUser, setErrorUser] = useState(null);
 
     const userId = JSON.parse(localStorage.getItem('userId'));
+    const listMoviesByUser = [];
 
     useEffect(() => {
         const fetchMoviesByUser = async () => {
@@ -32,15 +33,18 @@ const useFetchMoviesByUser = () => {
                 }
 
                 const datos = await response.json();
-                console.log("useFetchMovieByUser");
+                console.log("datos");
                 console.log(datos);
-
-                console.log("datos.data");
-                console.log(datos.data[0]);
-
-                console.log("datos.data.orderDetails");
-                console.log(datos.data[0].orderDetails);
-                setMoviesByUser(datos.data[0].orderDetails);
+                if (datos.data.length > 0) {
+                    for (let x of datos.data) {
+                        for (let y of x.orderDetails) {
+                            listMoviesByUser.push(y);
+                        }
+                    }
+                }
+                console.log("listMoviesByUser");
+                console.log(listMoviesByUser);
+                setMoviesByUser(listMoviesByUser);
             } catch (error) {
                 setErrorUser(error);
             } finally {

@@ -5,8 +5,8 @@ import useFetchMovies from "../hooks/useFetchMovies";
 import useFetchMoviesByUser from "../hooks/useFetchMoviesByUser";
 
 export const MovieListPurchased = () => {
-    const { moviesByUser, loadingUser, errorUser } = useFetchMoviesByUser();
-    const { movieDetails, loading, error } = useFetchMovies();
+    const {moviesByUser, loadingUser, errorUser} = useFetchMoviesByUser();
+    const {movieDetails, loading, error} = useFetchMovies();
 
     const filteredResults = getMoviesByUser(movieDetails, moviesByUser);
     console.log("filteredResults");
@@ -50,19 +50,11 @@ export const MovieListPurchased = () => {
 };
 
 function getMoviesByUser(movieDetails, moviesByUser, setFilteredMovies) {
-    /*console.log("movieDetails");
-    console.log(movieDetails);
-
-    console.log("moviesByUser");
-    console.log(moviesByUser);*/
-
-    let filteredMoviesByUser;
+    let filteredMoviesByUser = [];
 
     if (movieDetails.length > 0 && moviesByUser.length > 0) {
         filteredMoviesByUser = movieDetails.filter(movieDetail => moviesByUser.some(
             movieUser => movieUser.movieId === movieDetail.id));
-        /*console.log("filteredMoviesByUser");
-        console.log(filteredMoviesByUser);*/
     }
 
     return filteredMoviesByUser;
