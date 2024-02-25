@@ -31,7 +31,7 @@ export const MovieListPurchased = () => {
                             id={movie.id}
                             name={movie.name}
                             director={movie.director}
-                            imagen={movie.imagen}
+                            imagen={movie.image}
                             idioma={movie.idioma}
                             categoria={movie.categoria}
                             actores={movie.actores}
