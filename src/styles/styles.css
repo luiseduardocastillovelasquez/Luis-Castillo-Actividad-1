@@ -299,6 +299,11 @@ div.column p span {
     border: 1px solid #ccc;
     border-radius: 5px;
     text-align: center;
+    background-color: black;
+}
+
+.additional-details-item a {
+    color: white;
 }
 
 .detail-name {
