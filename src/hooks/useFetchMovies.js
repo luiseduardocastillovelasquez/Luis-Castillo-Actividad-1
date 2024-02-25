@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
+import {useState, useEffect} from 'react';
 
 const useFetchMovies = (movieId, serviceType) => {
     const [movieDetails, setMovieDetails] = useState([]);
-    const [agregateMovieDetails, setAgregateMovieDetails] = useState([]);
+    const [aggregateMovieDetails, setAggregateMovieDetails] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
@@ -12,10 +12,11 @@ const useFetchMovies = (movieId, serviceType) => {
                 let url = process.env.REACT_APP_API_URL_MOVIE;
                 if (movieId) {
                     url += `/${movieId}`;
-                } else if (serviceType === 'agregate') {
-                    url += `?agregate=true`;
+                } else if (serviceType === 'aggregate') {
+                    url += `?aggregate=true`;
+                } else if (serviceType) {
+                    url += `?classification=${serviceType}`;
                 }
-
 
                 const response = await fetch(url, {
                     method: 'POST',
@@ -30,12 +31,20 @@ const useFetchMovies = (movieId, serviceType) => {
                 }
 
                 const movies = await response.json();
+<<<<<<< HEAD
                 //console.log(movies);
                 if (serviceType === 'agregate') {
                     setAgregateMovieDetails(movies.responses);
                 } else{
+=======
+
+                if (serviceType === 'aggregate') {
+                    setAggregateMovieDetails(movies.responses);
+                } else {
+>>>>>>> 136fbd037cff00a66c88fc3867209d10db56d93a
                     setMovieDetails(movies.products ? movies.products : movies);
-            }
+                }
+
             } catch (error) {
                 setError(error);
             } finally {
@@ -46,7 +55,7 @@ const useFetchMovies = (movieId, serviceType) => {
         fetchMovieDetails();
     }, [movieId, serviceType]); // Este useEffect se ejecuta solo una vez, al montar el componente
 
-    return { movieDetails, agregateMovieDetails, loading, error };
+    return { movieDetails, aggregateMovieDetails, loading, error };
 };
 
 export default useFetchMovies;

@@ -1,14 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Movie } from "../components/Movie";
 import LinearProgress from "./LinearProgress";
 import UseSearch from "../hooks/useSearch";
 import useFetchMovies from "../hooks/useFetchMovies";
+import {Link} from "react-router-dom";
 
 export const MoviesList = () => {
     const [search, setSearch] = useState("");
-    const { movieDetails, loading, error } = useFetchMovies();
-    const [filteredMovies, setFilteredMovies] = useState([])
-    const { agregateMovieDetails, agregateLoading, agregateError } = useFetchMovies(null, 'agregate');
+    const [filteredMovies, setFilteredMovies] = useState([]);
+    const {movieDetails, loading, error} = useFetchMovies();
+    const {aggregateMovieDetails, aggregateLoading, aggregateError} = useFetchMovies(null, 'aggregate');
 
 
     useEffect(() => {
@@ -36,22 +36,24 @@ export const MoviesList = () => {
             <h3 className="additional-details-title">Detalles Adicionales:</h3>
 
             <div className="additional-details-container">
-                {agregateMovieDetails && agregateMovieDetails.length > 0 && (
+                {aggregateMovieDetails && aggregateMovieDetails.length > 0 && (
                     <div className="additional-details-list">
-                        {agregateMovieDetails.map((detail, index) => (
+                        {aggregateMovieDetails.map((detail, index) => (
                             <div key={index} className="additional-details-item">
-                                <p className="detail-name">{detail.name}:</p>
-                                <span className="detail-count">{detail.count}</span>
+                                <Link to={`/movies/category/${detail.name}`}>
+                                    <p className="detail-name">{detail.name}:</p>
+                                    <span className="detail-count">{detail.count}</span>
+                                </Link>
                             </div>
                         ))}
                     </div>
                 )}
             </div>
 
-            <UseSearch onSearch={handleSearch} />
+            <UseSearch onSearch={handleSearch}/>
             <div className="movies-container">
                 {loading ? (
-                    <LinearProgress color="green" />
+                    <LinearProgress color="green"/>
                 ) : (
                     filteredMovies.map((movie, index) => (
                         <Movie

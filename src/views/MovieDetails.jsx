@@ -78,7 +78,7 @@ const MovieDetails = () => {
                 <div className="modal">
                     <div className="modal-content">
                         <p>¿Estás seguro de que quieres alquilar?</p>
-                        <p>{movieDetails.name} a <span>${movieDetails.precioalquiler} Pesos</span></p>
+                        <p>{movieDetails.name} a <span>${movieDetails.rentalValue} Pesos</span></p>
                         <button className="detalle-button" onClick={pagarAlquiler}>Aceptar</button>
                         <button className="detalle-button" onClick={() => setShowModal(false)}>Cancelar</button>
                     </div>
@@ -89,7 +89,7 @@ const MovieDetails = () => {
                     <div className="modal-content">
                         <p>¿Estás seguro de que quieres comprar la Pelicula?</p>
                         <p>{movieDetails.name}</p>
-                        <p>Valor Compra: <span>${movieDetails.preciocompra} Pesos</span></p>
+                        <p>Valor Compra: <span>${movieDetails.purchaseValue} Pesos</span></p>
                         <button className="detalle-button" onClick={pagarComprar}>Aceptar</button>
                         <button className="detalle-button" onClick={() => setShowModalComprar(false)}>Cancelar</button>
                     </div>

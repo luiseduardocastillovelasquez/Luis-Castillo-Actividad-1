@@ -1,28 +1,27 @@
-import React, {useContext} from "react";
-import { useParams} from "react-router-dom";
-import {MovieContext} from "../context/MovieContext";
+import React from "react";
+import {useParams} from "react-router-dom";
 import LinearProgress from "./LinearProgress";
+import useFetchMovies from "../hooks/useFetchMovies";
+
 const VerMovie = () => {
     const {movieId} = useParams();
-    const {movies} = useContext(MovieContext);
-    const movie = movies.find(r => r.id === movieId);
+    const {movieDetails, loading, error} = useFetchMovies(movieId, null);
 
 
-    if (!movies){
+    if (!movieDetails) {
         return <h2>Pelicula no encontrada</h2>;
     }
 
     return (
-
-        movies.length > 0 ? (
-        <div className="movie">
-            <h2>{movie.name}</h2>
-            <div className="trailer-container">
-                <div dangerouslySetInnerHTML={{ __html: movie.trailler }} />
+        loading ? (
+            <LinearProgress color="green"/>
+        ) : (
+            <div className="movie">
+                <h2>{movieDetails.name}</h2>
+                <div className="trailer-container">
+                    <div dangerouslySetInnerHTML={{__html: movieDetails.video}}/>
+                </div>
             </div>
-        </div>
-        ):(
-            <LinearProgress color="green" />
         )
     );
 }
