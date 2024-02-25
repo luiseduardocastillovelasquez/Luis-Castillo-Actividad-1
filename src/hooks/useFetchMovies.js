@@ -15,7 +15,7 @@ const useFetchMovies = (movieId, serviceType) => {
                 } else if (serviceType === 'aggregate') {
                     url += `?aggregate=true`;
                 } else if (serviceType) {
-                    url += `?classification=${serviceType}`;
+                    url += `?classification=${encodeURIComponent(serviceType)}`;
                 }
 
                 const response = await fetch(url, {
